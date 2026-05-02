@@ -15,13 +15,14 @@ def main():
     while True:
         log_state()
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return
-            screen.fill((100, 10, 10))
-            pygame.display.flip()
-            millisecon_counter = clock.tick(60)
-            dt = millisecon_counter / 1000.0
-            print(dt)
+            pass
+        if event.type == pygame.QUIT:
+            return
+        screen.fill((100, 10, 10))
+        pygame.display.flip()
+        millisecon_counter = clock.tick(60)
+        dt = millisecon_counter / 1000.0
+        #print(dt)
 
 
 
