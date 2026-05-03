@@ -22,7 +22,10 @@ def main():
             return
         screen.fill("black")
         player.draw(screen)
-        pygame.display.flip()
+        player.update(dt)
+
+        
+        pygame.display.flip() # Happens after all the drawing is done
         
         millisecon_counter = clock.tick(60)
         dt = millisecon_counter / 1000.0
