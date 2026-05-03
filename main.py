@@ -1,5 +1,6 @@
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, LINE_WIDTH
+from player import Player
 from logger import log_state
 
 
@@ -11,6 +12,7 @@ def main():
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     dt = 0
     while True:
         log_state()
@@ -18,8 +20,10 @@ def main():
             pass
         if event.type == pygame.QUIT:
             return
-        screen.fill((100, 10, 10))
+        screen.fill("black")
+
         pygame.display.flip()
+        player.draw(screen)
         millisecon_counter = clock.tick(60)
         dt = millisecon_counter / 1000.0
         #print(dt)
