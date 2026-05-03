@@ -21,9 +21,9 @@ def main():
         if event.type == pygame.QUIT:
             return
         screen.fill("black")
-
-        pygame.display.flip()
         player.draw(screen)
+        pygame.display.flip()
+        
         millisecon_counter = clock.tick(60)
         dt = millisecon_counter / 1000.0
         #print(dt)
