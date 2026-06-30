@@ -1,5 +1,6 @@
 import pygame
 import sys
+from bombs import Bomb
 from shot import Shot
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, LINE_WIDTH
 from player import Player
@@ -17,6 +18,7 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     shots = pygame.sprite.Group()
+    bombs = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -24,6 +26,7 @@ def main():
     Player.containers = (updatable, drawable)
     Shot.containers = (shots, updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
+    Bomb.containers = (bombs, updatable, drawable)
     asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     dt = 0
