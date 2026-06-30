@@ -9,6 +9,6 @@ class Bomb(CircleShape):
         self.velocity = pygame.Vector2(0, 0)
 
     def draw(self, screen):
-        pygame.draw.circle(screen, "red", self.position, BOMB_RADIUS, 2)
+        pygame.draw.circle(screen, "red", self.position, BOMB_RADIUS, 3)
 
     

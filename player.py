@@ -1,21 +1,34 @@
 from circleshape import CircleShape
 from shot import Shot
 from bombs import Bomb
-from constants import BOMB_RADIUS, PLAYER_RADIUS, LINE_WIDTH, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOT_SPEED
+from constants import BOMB_RADIUS, BOMB_COOLDOWN, PLAYER_RADIUS, LINE_WIDTH, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOT_SPEED, PLAYER_SHOT_COOLDOWN
 import pygame
 
 class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.shot_cooldown = 0
+        self.bomb_cooldown = 0
+
 
     def drop_bomb(self):
+        if self.bomb_cooldown > 0:
+            return
+        self.bomb_cooldown = BOMB_COOLDOWN
         bomb = Bomb(self.position.x, self.position.y, BOMB_RADIUS)
-    
+            
+
+
 
     def shoot(self):
+        if self.shot_cooldown > 0:
+            return
+        self.shot_cooldown = PLAYER_SHOT_COOLDOWN
         shot = Shot(self.position.x, self.position.y)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOT_SPEED
+        
+
 
     
     def rotate(self, dt,):
@@ -40,6 +53,8 @@ class Player(CircleShape):
         return [a, b, c]
     
     def update(self, dt):
+        self.shot_cooldown -= dt
+        self.bomb_cooldown -= dt
         keys = pygame.key.get_pressed()
         if keys[pygame.K_b]:
             self.drop_bomb()

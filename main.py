@@ -44,6 +44,18 @@ def main():
         for item in drawable:
             item.draw(screen)
         for item in asteroids:
+            for shot in shots:
+                if shot.collides_with(item):
+                    log_event("asteroid_shot")
+                    item.kill()
+                    shot.kill()
+        for item in asteroids:
+            for bomb in bombs:
+                if bomb.collides_with(item):
+                    log_event("asteroid_bombed")
+                    item.kill()
+                    bomb.kill()
+        for item in asteroids:
             if player.collides_with(item):
                 log_event("player_hit")
                 print("Game over!")
