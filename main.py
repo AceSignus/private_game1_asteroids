@@ -4,8 +4,7 @@ from bombs import Bomb
 from shot import Shot
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, LINE_WIDTH
 from player import Player
-from logger import log_state
-from logger import log_event
+from logger import log_state, log_event
 from asteroids import Asteroid
 from asteroidfield import AsteroidField
 
@@ -47,13 +46,13 @@ def main():
             for shot in shots:
                 if shot.collides_with(item):
                     log_event("asteroid_shot")
-                    item.kill()
+                    item.split()
                     shot.kill()
         for item in asteroids:
             for bomb in bombs:
                 if bomb.collides_with(item):
                     log_event("asteroid_bombed")
-                    item.kill()
+                    item.split()
                     bomb.kill()
         for item in asteroids:
             if player.collides_with(item):
