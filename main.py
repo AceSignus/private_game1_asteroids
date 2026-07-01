@@ -2,7 +2,7 @@ import pygame
 import sys
 from bombs import Bomb
 from shot import Shot
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, LINE_WIDTH
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCORE_NUMBER
 from player import Player
 from logger import log_state, log_event
 from asteroids import Asteroid
@@ -29,6 +29,8 @@ def main():
     asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     dt = 0
+    score = 0
+    font = pygame.font.Font(None, 36)
     
     
     while True:
@@ -48,17 +50,21 @@ def main():
                     log_event("asteroid_shot")
                     item.split()
                     shot.kill()
-        for item in asteroids:
+                    score += SCORE_NUMBER // item.radius
             for bomb in bombs:
                 if bomb.collides_with(item):
                     log_event("asteroid_bombed")
-                    item.split()
+                    item.kill()
                     bomb.kill()
+                    score += item.radius // 10
         for item in asteroids:
             if player.collides_with(item):
                 log_event("player_hit")
                 print("Game over!")
+                print(f"Final score: {score}")
                 sys.exit()
+        score_surface = font.render(f"Score: {score}", True, "white")
+        screen.blit(score_surface, (10, 10))
 
         pygame.display.flip() # Happens after all the drawing is done
         
