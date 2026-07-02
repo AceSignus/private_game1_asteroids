@@ -7,6 +7,7 @@ from player import Player
 from logger import log_state, log_event
 from asteroids import Asteroid
 from asteroidfield import AsteroidField
+from main_menu import main_menu
 
 def main():
     print("Starting Asteroids...")
@@ -15,6 +16,7 @@ def main():
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    main_menu(screen)
     clock = pygame.time.Clock()
     shots = pygame.sprite.Group()
     bombs = pygame.sprite.Group()
@@ -61,7 +63,6 @@ def main():
             if player.collides_with(item):
                 log_event("player_hit")
                 print("Game over!")
-                print(f"Final score: {score}")
                 sys.exit()
         score_surface = font.render(f"Score: {score}", True, "white")
         screen.blit(score_surface, (10, 10))
